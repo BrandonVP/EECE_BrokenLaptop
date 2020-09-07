@@ -1,0 +1,102 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <div class="jumbotron p-3">
+
+                <h2>
+                    <b>{{ title }} </b>
+                </h2>
+
+                <table class="table table-hover table-dark">
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+
+                    </tr>
+
+                    {% for brokenlaptop in brokenlaptops %}
+                    <tr>
+                        <td>{{ brokenlaptop.id }}</td>
+                        <td>{{ brokenlaptop.brand }}</td>
+                        <td>{{ brokenlaptop.price }}</td>
+
+                        <td>
+                            <a href="/update/{{brokenlaptop.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{brokenlaptop.id}}">Edit</a>
+                            <a href="/delete/{{brokenlaptop.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Confirm Delete?')">Delete</a>
+                        </td>
+                    </tr>
+
+                    <div id="modaledit{{brokenlaptop.id}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Update Information</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form action="{{url_for('update')}}" method="POST">
+
+                                        <div class="form-group">
+
+
+                                            <label>Brand:</label>
+                                            <input type="hidden" name="id" value="{{brokenlaptop.id}}">
+
+                                            <input type="text" class="form-control" name="brand" value="{{brokenlaptop.brand}}">
+
+
+                                        </div>
+
+                                        <div class="form-group">
+
+
+                                            <label>Price:</label>
+
+                                            <input type="text" class="form-control" name="price" value="{{brokenlaptop.price}}">
+
+
+                                        </div>
+
+                                        <div class="form-group">
+
+
+                                            <button class="btn btn-primary" type="submit">update</button>
+
+
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <div class="modal-footer">
+
+
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+                                </div>
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+       
+
+<div>
+    {% endblock %}
+
+</div>
+
+
