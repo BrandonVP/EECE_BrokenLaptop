@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>b053b905-61e9-41f8-a9dc-6ebf6c4d87e3</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>app.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,7 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="app.py" />
+    <Compile Include="main.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="static\" />
@@ -31,6 +31,8 @@
     <Folder Include="templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.yaml" />
+    <Content Include="requirements.txt" />
     <Content Include="static\content\bootstrap.css" />
     <Content Include="static\content\bootstrap.min.css" />
     <Content Include="static\content\site.css" />
