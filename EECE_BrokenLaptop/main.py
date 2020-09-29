@@ -1,7 +1,6 @@
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, redirect, url_for, session
-
-import MySQLdb.cursors
+#import MySQLdb.cursors
 import re
 import os
 
@@ -52,7 +51,7 @@ db = SQLAlchemy(app)
 def login():
     # Output message if something goes wrong...
     msg = ''
-    return render_template('index.html', msg='')
+    return render_template('login.html', msg='')
 
 
     # Routes users to the home page
