@@ -47,6 +47,7 @@ db = SQLAlchemy(app)
 @app.route('/')
 def index():
     brokenlaptops = BrokenLaptop.query.all()
+
     return render_template(
         "index.html",
         brokenlaptops=brokenlaptops,
@@ -62,13 +63,16 @@ def login():
     if request.method == "POST":
         uname = request.form["uname"]
         passw = request.form["passw"]
-        
-        login = UserLogin.query.filter_by(username=uname, password=passw).first()
+        login = user.query.filter_by(username=uname, password=passw).first()
+
         if login is not None:
             session['loggedin'] = True
             session['username'] = uname
             return redirect(url_for("home"))
-    return render_template("login.html", year=datetime.now().year)
+        else:
+            return render_template("login.html", year=datetime.now().year, title='Login', error='Invalid Login')
+
+    return render_template("login.html", year=datetime.now().year, title='Login')
 
 
     # Login/Register contributor
@@ -85,12 +89,16 @@ def register():
         mail = request.form['mail']
         passw = request.form['passw']
 
-        register = UserLogin(username = uname, email = mail, password = passw)
-        db.session.add(register)
-        db.session.commit()
+        # Check that all forms were completed
+        if uname != "":
+            register = user(username = uname, email = mail, password = passw)
+            db.session.add(register)
+            db.session.commit()
+            return redirect(url_for("login"))
+        else:
+            return render_template("register.html", year=datetime.now().year, title='Register', error='Please complete all forms')
 
-        return redirect(url_for("login"))
-    return render_template("register.html", year=datetime.now().year)
+    return render_template("register.html", year=datetime.now().year, title='Register')
 
 
     # Logout user and route to index
@@ -108,6 +116,7 @@ def logout():
 def home():
     if session['loggedin']:
         brokenlaptops = BrokenLaptop.query.all()
+
         return render_template(
             "home.html",
             brokenlaptops=brokenlaptops,
@@ -122,6 +131,7 @@ def home():
 def view():
     if session['loggedin']:
         brokenlaptops = BrokenLaptop.query.all()
+
         return render_template(
             "view.html",
             brokenlaptops=brokenlaptops,
@@ -143,6 +153,7 @@ def create():
             db.session.add(brokenlaptop)
             db.session.commit()
             brokenlaptops = BrokenLaptop.query.all()
+
             return render_template("view.html",
                                    brokenlaptops=brokenlaptops,
                                    title='View Laptops',
@@ -156,6 +167,7 @@ def create():
             user=session['username'],
             year=datetime.now().year
         )
+
        except:
           return render_template(
             "create.html",
@@ -173,8 +185,8 @@ def delete(laptop_id):
         brokenlaptop = BrokenLaptop.query.get(laptop_id)
         db.session.delete(brokenlaptop)
         db.session.commit()
-
         brokenlaptops = BrokenLaptop.query.all()
+
         return render_template(
                                "view.html",
                                brokenlaptops=brokenlaptops,
@@ -190,13 +202,11 @@ def update():
     if session['loggedin']:
         if request.method == 'POST':
             my_data = BrokenLaptop.query.get(request.form.get('id'))
- 
             my_data.brand = request.form['brand']
             my_data.price = request.form['price']
- 
             db.session.commit()
- 
             brokenlaptops = BrokenLaptop.query.all()
+
             return render_template(
                                    "view.html",
                                    brokenlaptops=brokenlaptops,
@@ -244,7 +254,7 @@ class BrokenLaptop(db.Model):
 # This class creates a table in the database named UserLogin with
 # entity fields id as integerm username as text, password as text 
 # and email as text
-class UserLogin(db.Model):
+class user(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(50), nullable = False)
     password = db.Column(db.String(255), nullable = False)

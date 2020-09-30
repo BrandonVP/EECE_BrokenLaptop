@@ -1,23 +1,25 @@
 ﻿{% extends "loglayout.html" %}
 
 {% block content %}
-<div class="jumbotron">
-    <div class="container">
-        <div class="row" style="margin-top: 40px">
-            <div class="col-sm-6">
-                <form method="POST">
-                    <div class="form-group">
-                        <label for="email">Username : </label>
-                        <input type="text" name="uname" class="form-control" id="uname">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Password : </label>
-                        <input type="password" name="passw" class="form-control" id="passw">
-                    </div>
-                    <button type="submit" class="btn btn-success float-right">Login</button>
-                </form>
+    <div class="jumbotron">
+        <h2><b>{{ title }}</b></h2>
+        <div class="container">
+            <div class="row" style="margin-top: 40px">
+                <div class="col-sm-6">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="email">Username : </label>
+                            <input type="text" name="uname" class="form-control" id="uname">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Password : </label>
+                            <input type="password" name="passw" class="form-control" id="passw">
+                        </div>
+                        <h3><font color="red">{{ error }}</font></h3>
+                        <button type="submit" class="btn btn-success float-right">Login</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
