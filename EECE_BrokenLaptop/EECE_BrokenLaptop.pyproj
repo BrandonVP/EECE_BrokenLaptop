@@ -60,14 +60,18 @@
     <Content Include="templates\about.html" />
     <Content Include="templates\contact.html" />
     <Content Include="templates\create.html" />
-    <Content Include="templates\delete.html" />
+    <Content Include="templates\home.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="templates\index.html" />
-    <Content Include="templates\index_old.html" />
     <Content Include="templates\layout.html" />
     <Content Include="templates\login.html">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="templates\update.html" />
+    <Content Include="templates\loglayout.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\register.html" />
     <Content Include="templates\view.html" />
   </ItemGroup>
   <ItemGroup>

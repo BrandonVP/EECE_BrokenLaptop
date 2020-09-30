@@ -1,12 +1,9 @@
 {% extends "layout.html" %}
-
 {% block content %}
-
     <div class="container">
         <div class="row">
             <div class="col md-12">
                 <div class="jumbotron p-3">
-
                     <h2>
                         <b>{{ title }} </b>
                     </h2>
@@ -17,21 +14,17 @@
                                 <td align="center">Price</td>
                                 <td></td>
                             </tr>
-
                             <tr>
                                 <td><input name="brand" type="text"></td>
                                 <td><input name="price" type="text"></td>
                                 <td><button type="submit" class="btn btn-success float-right" value="Add">Add</button></td>
-
                             </tr>
-
                         </table>
                     </form>
-                    <b>{{ error }} </b>
+                    <b><font color="red">{{ error }}</font></b>
                 </div>
             </div>
         </div>
     </div>
-
-                    {% endblock %}
+{% endblock %}
 
